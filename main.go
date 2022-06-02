@@ -85,7 +85,7 @@ func main() {
 	flag.Parse()
 
 	if *input == "" {
-		fmt.Println(errors.New("[ERROR] No input file given"))
+		fmt.Fprintln(os.Stderr, errors.New("no input file given"))
 		os.Exit(1)
 	}
 
@@ -95,13 +95,13 @@ func main() {
 
 	i, err := iwi.ReadIWI(*input)
 	if err != nil {
-		fmt.Printf("[ERROR] %v\n", err)
+		fmt.Fprintf(os.Stderr, "%v\n", err)
 		os.Exit(1)
 	}
 
 	err = writeDDS(i, *output)
 	if err != nil {
-		fmt.Printf("[ERROR] %v\n", err)
+		fmt.Fprintf(os.Stderr, "%v\n", err)
 		os.Exit(1)
 	}
 }
